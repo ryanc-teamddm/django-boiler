@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     # Apps installed via pip (see requirements/base.txt)
     'debug_toolbar',
     'south',
-    'django-annoying',
     'google_analytics',
 )
 
