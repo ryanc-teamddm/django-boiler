@@ -1,4 +1,9 @@
 # Django settings for django_boiler project.
+# Django settings for boiler project.
+import os
+root = os.path.dirname(__file__).replace('\\','/')
+def rel(*x):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -27,7 +32,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Detroit'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
