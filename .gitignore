@@ -1,9 +1,0 @@
-*.log
-*.pot
-*.pyc
-*.DS_Store
-/static
-/media/uploads
-local_settings.py
-*.db
-
