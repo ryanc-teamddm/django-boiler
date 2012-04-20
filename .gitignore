@@ -2,5 +2,6 @@
 *.pot
 *.pyc
 local_settings.py
+django_boiler/local_settings.py
 .DS_Store
 *.db
