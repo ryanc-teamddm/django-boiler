@@ -1,9 +1,7 @@
 *.log
 *.pot
 *.pyc
-*.DS_Store
-/static
-/media/uploads
 local_settings.py
+django_boiler/local_settings.py
+.DS_Store
 *.db
-
