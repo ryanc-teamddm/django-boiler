@@ -137,6 +137,9 @@ GOOGLE_ANALYTICS_MODEL = True
 
 # Debug toolbar settings.
 INTERNAL_IPS = ('127.0.0.1',)
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS' : False
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
