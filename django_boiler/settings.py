@@ -16,8 +16,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'test.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -53,12 +53,12 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = rel('../../media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -88,6 +88,15 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')es_$1kc=g6x4^9!w)_9c#y2iq#p$t=($t*j)$*+wuy@#^7)dg'
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.core.context_processors.static',
+)
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -114,6 +123,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    rel('../templates'),
 )
 
 INSTALLED_APPS = (
@@ -129,6 +139,10 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'south',
     'google_analytics',
+    'feincms',
+    'feincms.module.page',
+    'feincms.module.medialibrary',
+    'mptt',
 )
 
 # For the google_analytics app.
@@ -169,6 +183,31 @@ LOGGING = {
         },
     }
 }
+
+FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = True
+
+from django.utils.translation import ugettext_lazy as _
+
+from feincms.module.page.models import Page
+from feincms.content.richtext.models import RichTextContent
+from feincms.content.medialibrary.v2 import MediaFileContent
+
+Page.register_extensions('datepublisher', 'translations') # Example set of extensions
+
+Page.register_templates({
+    'title': _('Standard template'),
+    'path': 'base.html',
+    'regions': (
+        ('main', _('Main content area')),
+        ('sidebar', _('Sidebar'), 'inherited'),
+        ),
+    })
+
+Page.create_content_type(RichTextContent)
+Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
+    ('default', _('default')),
+    ('lightbox', _('lightbox')),
+    ))
 
 # Import any local settings
 try:

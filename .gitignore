@@ -5,3 +5,5 @@ local_settings.py
 django_boiler/local_settings.py
 .DS_Store
 *.db
+django_boiler/static/
+medialibrary/
