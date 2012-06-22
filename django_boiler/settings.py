@@ -188,6 +188,13 @@ FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = True
 
 from django.utils.translation import ugettext_lazy as _
 
+
+# Import any local settings
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
 from feincms.module.page.models import Page
 from feincms.content.richtext.models import RichTextContent
 from feincms.content.medialibrary.v2 import MediaFileContent
@@ -209,8 +216,3 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('lightbox', _('lightbox')),
     ))
 
-# Import any local settings
-try:
-    from local_settings import *
-except ImportError:
-    pass
